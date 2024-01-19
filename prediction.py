@@ -7,7 +7,7 @@ data_labels = ['BACKGROUND', 'CONCLUSIONS', 'METHODS', 'OBJECTIVE', 'RESULTS']
 def model_predict(abstract):
 
     abstract = np.array(abstract)
-     
+
     shape = abstract.shape
 
     labels = tf.data.Dataset.from_tensor_slices(["" for i in range(shape[0])])
@@ -19,9 +19,9 @@ def model_predict(abstract):
     dataset = dataset.batch(1)
 
     predict_proba = model.predict(dataset, verbose = 0)
-    
+
     predictions = predict_proba.argmax(axis = 1)
 
     pred_labels = [data_labels[pred] for pred in predictions]
-    
+
     return pred_labels
